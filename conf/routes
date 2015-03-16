@@ -1,0 +1,15 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /                    controllers.Application.index
+
+POST        /rtb/getAd           controllers.DSPserver.tagCadeAuction
+
+POST        /rtb/auction         controllers.AuctionController.auctionRTB
+
+POST        /rtb/testAuction     controllers.TestAuctionController.index
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file        controllers.Assets.at(path="/public", file)

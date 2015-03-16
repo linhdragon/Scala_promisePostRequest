@@ -11,14 +11,16 @@ object TestAuctionController extends Controller {
 
   def index = Action.async{
 
-    val data = Json.obj(
-      "key1" -> "value1",
-      "key2" -> "value2"
-    )
+    request =>
+
+      def requestData = request.body.asJson.get
+
+      val data: JsValue = Json.parse(Json.prettyPrint(requestData))
+
 
     WS.url("http://localhost:9000/rtb/getAd").post(data).map{
       response =>
-        Ok(response.body).as("text/html")
+        Ok(response.body).as("application/json")
     }
 
   }

@@ -15,7 +15,9 @@ object AuctionController extends Controller {
 
   case class Person(name: String, age: Long)
 
-  def auctionRTB = Action {request =>
+  def auctionRTB = Action {
+
+    request =>
 
     def requestData = request.body.asJson.get
 

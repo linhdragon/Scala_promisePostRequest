@@ -8,9 +8,11 @@ object DSPserver extends Controller {
 
   def tagCadeAuction = Action { request =>
 
-    def requestData = request.body.asJson.get
+    var adRequest = request.body.asJson.get
 
-    Ok(requestData)
+
+
+    Ok(adRequest)
 
   }
 }

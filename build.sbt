@@ -10,5 +10,7 @@ libraryDependencies ++= Seq(
   jdbc,
   anorm,
   cache,
-  ws
+  ws,
+  "io.spray" %%  "spray-json" % "1.3.1",
+  "net.liftweb" %% "lift-json" % "2.2"
 )

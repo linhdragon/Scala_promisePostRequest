@@ -2,3 +2,7 @@ This is your new Play application
 =================================
 
 This file will be packaged with your application, when using `activator dist`.
+
+reference
+
+* https://www.safaribooksonline.com/library/view/scala-cookbook/9781449340292/ch15s04.html

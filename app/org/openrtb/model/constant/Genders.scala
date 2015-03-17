@@ -1,5 +1,5 @@
 package org.openrtb.model.constant
-
+import tagcade.rtb.auction.model.constant.{Constants, Constant}
 trait Gender extends Constant {
   final type Value = String
 }

@@ -1,7 +1,7 @@
 package controllers
 
 import net.liftweb.json.{JValue, DefaultFormats}
-import tagcade.rtb.auction.model.{AdRequest, Imp}
+import tagcade.rtb.auction.model.{AdRequest, ImpAd}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -57,14 +57,14 @@ object TestAuctionController extends Controller {
       val rs = jValue2.extract[AdRequest]
       println(rs.id)
       println(rs.impsRequest)
-      val arrImp: Array[Imp]= rs.impsRequest
+      val arrImp: Array[ImpAd]= rs.impsRequest
 
       println(arrImp(0).id)
-      println(arrImp(0).impId)
+      println(arrImp(0).id_Imp)
 
 
       println(arrImp(1).id)
-      println(arrImp(1).impId)
+      println(arrImp(1).id_Imp)
 
 
       /**

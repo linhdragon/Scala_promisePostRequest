@@ -5,10 +5,10 @@ import java.io._
  * tham so dau vao rat quan trong, phai de trung voi thuoc tinh cua json
  * Created by pc on 16/03/2015.
  */
-class AdRequest(val id: String, val imps: Array[Imp]) {
+class AdRequest(val id: String, val imps: Array[ImpAd]) {
 
   var idRequest: String = id
-  var impsRequest: Array[Imp] = imps
+  var impsRequest: Array[ImpAd] = imps
 
   def validate{
     println("validate xc")

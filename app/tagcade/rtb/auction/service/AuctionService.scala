@@ -1,10 +1,12 @@
 package tagcade.rtb.auction.service
 
-import tagcade.rtb.auction.model.AdRequest
+import org.openrtb.model.bidrequest.BidRequest
+import tagcade.rtb.auction.model.{AdDetail, AdRequest}
+import tagcade.rtb.auction.builder.{BidRequestBuilder, AdDetailBuilder}
 
-/**
- * Created by pc on 16/03/2015.
- */
+import scala.concurrent.Future
+
+
 class AuctionService {
 
   def addInt(a: Int, b: Int): Int = {
@@ -18,7 +20,42 @@ class AuctionService {
 
   def processRequest(adRequest: AdRequest): String = {
 
+    /**
+     * load AdDetail
+     */
+    val adDetail: AdDetail = new AdDetailBuilder(adRequest).createAdRequest();
+
+    /**
+     * BidRequest
+     */
+    val bidRequest: BidRequest = new BidRequestBuilder(adRequest, adDetail).createBidRequest()
+
+    /**
+     * DSP requestor
+     */
+    val dspRequestor: DSPRequestor = new DSPRequestor
+
+    /**
+     * broadcast
+     */
+    val listResponses: List[Future[String]] = dspRequestor.broadcastBidRequest(bidRequest)
+
+    /**
+     * pickWinner
+     */
+
+    val winningBidList = null
+
     return "hello"
+
+  }
+
+
+  def findWinningBids(bidRequest: BidRequest,listResponses : List[Future[String]] ): List[Future[String]] = {
+
+
+
+    null
 
   }
 

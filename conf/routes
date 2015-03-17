@@ -3,13 +3,15 @@
 # ~~~~
 
 # Home page
-GET         /                    controllers.Application.index
+GET         /                       controllers.Application.index
 
-POST        /rtb/getAd           controllers.DSPserver.tagCadeAuction
+POST        /rtb/testAuction        controllers.TestAuctionController.index
 
-POST        /rtb/auction         controllers.AuctionController.auctionRTB
+POST        /rtb/auction            controllers.AuctionController.auctionRTB
 
-POST        /rtb/testAuction     controllers.TestAuctionController.index
+POST        /rtb/bid                controllers.DSPserver.requestDSPBid
+
+POST        /rtb/getAd              controllers.DSPserver.tagCadeAuction
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file        controllers.Assets.at(path="/public", file)
+GET         /assets/*file           controllers.Assets.at(path="/public", file)

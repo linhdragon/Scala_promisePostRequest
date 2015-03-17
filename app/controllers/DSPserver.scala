@@ -6,9 +6,21 @@ import play.api.mvc._
 
 object DSPserver extends Controller {
 
+  /**
+   * requestBid data
+   */
+
+  def requestDSPBid = Action { request =>
+
+    val adRequest = request.body.asJson.get
+
+    Ok(adRequest)
+
+  }
+
   def tagCadeAuction = Action { request =>
 
-    var adRequest = request.body.asJson.get
+    val adRequest = request.body.asJson.get
 
     Ok(adRequest)
 

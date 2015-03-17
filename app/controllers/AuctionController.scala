@@ -1,7 +1,9 @@
 package controllers
 
 import net.liftweb.json.{JValue, DefaultFormats}
+
 import tagcade.rtb.auction.model.{AdRequest, Imp}
+import tagcade.rtb.auction.service.AuctionService
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -16,9 +18,7 @@ import play.api.libs.json._
 import net.liftweb.json.DefaultFormats
 
 
-
 object AuctionController extends Controller {
-
 
   def auctionRTB = Action.async{
 
@@ -56,6 +56,10 @@ object AuctionController extends Controller {
 
       println(arrImp(1).id)
       println(arrImp(1).impId)
+
+      val auctionService = new AuctionService
+      val sume = auctionService.addInt(2,3)
+      println("Sum: "+ sume)
 
 
       /**

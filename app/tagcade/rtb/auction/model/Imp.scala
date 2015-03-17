@@ -5,9 +5,15 @@ package tagcade.rtb.auction.model
  * Created by pc on 16/03/2015.
  */
 
-class Imp(val id:String) {
+class Imp(val id:String, val typeOf: String, val width: Float, val height: Float) {
 
-  var impId = id
+  var id_Imp = id
+
+  var type_Imp = typeOf
+
+  var w_Imp = width
+
+  var height_Imp = height
 
   def validate{
 

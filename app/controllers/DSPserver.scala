@@ -10,8 +10,6 @@ object DSPserver extends Controller {
 
     var adRequest = request.body.asJson.get
 
-
-
     Ok(adRequest)
 
   }

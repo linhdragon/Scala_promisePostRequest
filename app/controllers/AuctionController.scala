@@ -1,74 +1,73 @@
 package controllers
 
+import net.liftweb.json.{JValue, DefaultFormats}
+import tagcade.rtb.auction.model.{AdRequest, Imp}
+
+import scala.concurrent.ExecutionContext.Implicits.global
+
 import play.api.mvc._
+
+import play.api.Play.current
+
+import play.api.libs.ws._
+
 import play.api.libs.json._
 
-import play.api.libs.json.Reads._
+import net.liftweb.json.DefaultFormats
 
-/**
- * Json.stringify(json)   -- jsonString
- * Json.prettyPrint(json)   -- jsonString
- * power of these method: convert string into json and revert
- */
+
 
 object AuctionController extends Controller {
 
-  case class Person(name: String, age: Long)
 
-  def auctionRTB = Action {
+  def auctionRTB = Action.async{
 
     request =>
 
-    def requestData = request.body.asJson.get
+      def requestData = request.body.asJson.get
 
-    val value: JsValue = Json.parse(Json.prettyPrint(requestData))
+      implicit val adRequest: JsValue = Json.parse(Json.prettyPrint(requestData))
+      /**
+       * start
+       */
+      case class RequestA(id: String, imps: Array[RequestB])
+      case class RequestB(id: String)
 
-    /**
-     * create a person
-     */
+      implicit val formats = DefaultFormats
 
-    val person = {
-      Person apply("name", (value \ ("age")).as[Long])
-    }
+      // simulate a json string
 
-    println(person.name)
+      var ooo = Json.prettyPrint(requestData)
 
-    println(person.age)
+      val jValue2 = net.liftweb.json.JsonParser.parse(ooo)
+      println(jValue2)
 
-    /**
-     * validate name field
-     */
-    val nameResult: JsResult[String] = (value \ "name").validate[String]
+      val adRequest1 = jValue2.extract[RequestA]
+      println(adRequest1.id)
 
-    nameResult match {
-      case s: JsSuccess[String] => println("Name: " + s.get)
-      case e: JsError => println("Errors: " + JsError.toFlatJson(e).toString())
-    }
+      val rs = jValue2.extract[AdRequest]
+      println(rs.id)
+      println(rs.impsRequest)
+      val arrImp: Array[Imp]= rs.impsRequest
 
-    /**
-     * validate age field
-     */
-    val ageResult: JsResult[Long] = (value \ "age").validate[Long]
-
-    ageResult match {
-      case s: JsSuccess[String] => println("age: " + s.get)
-      case e: JsError => println("Errors: " + JsError.toFlatJson(e).toString())
-    }
-
-    /**
-     * convert from person into json
-     * can use 2 methods
-     * Json.stringify(json)   -- jsonString
-     * Json.prettyPrint(json)   -- jsonString
-     */
+      println(arrImp(0).id)
+      println(arrImp(0).impId)
 
 
-    Json.prettyPrint(request.body.asJson.get)
+      println(arrImp(1).id)
+      println(arrImp(1).impId)
 
-    val jsonResult: JsValue = Json.parse(Json.prettyPrint(requestData))
 
-    Ok(jsonResult)
+      /**
+       * end
+       */
+
+      WS.url("http://localhost:9000/rtb/getAd").post(adRequest).map{
+        response =>
+          Ok(response.body).as("application/json")
+      }
+
+
 
   }
-
 }

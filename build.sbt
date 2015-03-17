@@ -12,5 +12,4 @@ libraryDependencies ++= Seq(
   cache,
   ws,
   "io.spray" %%  "spray-json" % "1.3.1",
-  "net.liftweb" %% "lift-json" % "2.2"
-)
+  "net.liftweb" %% "lift-json" % "2.6")
